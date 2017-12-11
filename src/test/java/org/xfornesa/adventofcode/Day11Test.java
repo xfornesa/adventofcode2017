@@ -19,6 +19,7 @@ public class Day11Test {
     final InputStream resourceAsStream = this.getClass().getResourceAsStream("/input11.txt");
     String input = IOUtils.toString(resourceAsStream, "UTF-8");
     Assert.assertEquals(722, sut.hexGrid(input));
+    Assert.assertEquals(1551, sut.furthest(input));
 
   }
 }
