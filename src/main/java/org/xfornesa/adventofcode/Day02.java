@@ -25,4 +25,24 @@ public class Day02 {
     }
     return max - min;
   }
+
+  public int sumDivisibleRows(String input) {
+    return Arrays.stream(input.split("\n"))
+        .mapToInt(this::divisibleValues)
+        .sum();
+  }
+
+  private int divisibleValues(String row) {
+    final String[] values = row.split("\t");
+    for (String value : values) {
+      final Integer currentValue = Integer.valueOf(value);
+      for (String candidateValue : values) {
+        final Integer candidate = Integer.valueOf(candidateValue);
+        if (candidate % currentValue == 0 && !candidate.equals(currentValue)) {
+          return candidate / currentValue;
+        }
+      }
+    }
+    return 0;
+  }
 }

@@ -13,6 +13,11 @@ public class Day02Test {
         "7\t5\t3\n" +
         "2\t4\t6\t8";
     Assert.assertEquals(18, sut.checksum(input01));
+    final String input01Part2 =
+        "5\t9\t2\t8\n" +
+        "9\t4\t7\t3\n" +
+        "3\t8\t6\t5";
+    Assert.assertEquals(9, sut.sumDivisibleRows(input01Part2));
 
     final String input02 = "116\t1470\t2610\t179\t2161\t2690\t831\t1824\t2361\t1050\t2201\t118\t145\t2275\t2625\t2333\n" +
         "976\t220\t1129\t553\t422\t950\t332\t204\t1247\t1092\t1091\t159\t174\t182\t984\t713\n" +
@@ -31,5 +36,6 @@ public class Day02Test {
         "73\t1620\t81\t1137\t812\t75\t1326\t1355\t1545\t1666\t1356\t1681\t1732\t85\t128\t902\n" +
         "571\t547\t160\t237\t256\t30\t496\t592\t385\t576\t183\t692\t192\t387\t647\t233";
     Assert.assertEquals(32020, sut.checksum(input02));
+    Assert.assertEquals(0, sut.sumDivisibleRows(input02));
   }
 }
