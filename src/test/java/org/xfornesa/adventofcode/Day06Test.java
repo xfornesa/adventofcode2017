@@ -11,10 +11,12 @@ public class Day06Test {
   public void tests() throws Exception {
     final Day06 sut = new Day06();
     Assert.assertEquals(5, sut.loop("0\t2\t7\t0"));
+    Assert.assertEquals(4, sut.cycles("0\t2\t7\t0"));
 
 
     final InputStream resourceAsStream = this.getClass().getResourceAsStream("/input06.txt");
     String input = IOUtils.toString(resourceAsStream, "UTF-8");
     Assert.assertEquals(11137, sut.loop(input));
+    Assert.assertEquals(1037, sut.cycles(input));
   }
 }
