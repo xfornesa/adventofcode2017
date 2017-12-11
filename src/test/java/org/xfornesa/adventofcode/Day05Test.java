@@ -17,9 +17,15 @@ public class Day05Test {
         "0\n" +
         "1\n" +
         "-3"));
+    Assert.assertEquals(10, sut.strangerJumps("0\n" +
+        "3\n" +
+        "0\n" +
+        "1\n" +
+        "-3"));
 
     final InputStream resourceAsStream = this.getClass().getResourceAsStream("/input05.txt");
     String input05 = IOUtils.toString(resourceAsStream, "UTF-8");
     Assert.assertEquals(355965, sut.jump(input05));
+    Assert.assertEquals(26948068, sut.strangerJumps(input05));
   }
 }

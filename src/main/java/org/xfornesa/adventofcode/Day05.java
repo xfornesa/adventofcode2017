@@ -21,4 +21,22 @@ public class Day05 {
 
     return moves;
   }
+
+  public int strangerJumps(String input) {
+    final String[] rows = input.split("\n");
+    final List<Integer> jumps = new LinkedList<>();
+    for(String row: rows) {
+      jumps.add(Integer.valueOf(row));
+    }
+    int currentIndex = 0;
+    int moves = 0;
+    while (currentIndex >= 0 && currentIndex < jumps.size()) {
+      int jump = jumps.get(currentIndex);
+      jumps.set(currentIndex, jump >= 3 ? jump - 1 : jump + 1);
+      currentIndex = currentIndex + jump;
+      moves++;
+    }
+
+    return moves;
+  }
 }
