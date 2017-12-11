@@ -13,5 +13,6 @@ public class Day03Test {
     Assert.assertEquals(2, sut.manhattanDistance(23));
     Assert.assertEquals(31, sut.manhattanDistance(1024));
     Assert.assertEquals(326, sut.manhattanDistance(361527));
+    Assert.assertEquals(363010, sut.largerValue(361527));
   }
 }

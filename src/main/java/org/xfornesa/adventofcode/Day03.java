@@ -89,4 +89,92 @@ public class Day03 {
 
     return result;
   }
+
+  public int largerValue(int source) {
+    return buildMatrixTakingLarger(source);
+  }
+
+  private int buildMatrixTakingLarger(int source) {
+    int dimension = 0;
+    for (int i = 1; i < source / 2; i = i + 2) {
+      if (i*i > source) {
+        dimension = i;
+        break;
+      }
+    }
+    int[][] result = new int[dimension][dimension];
+
+    // numConcentricSquares
+    int numConcentricSquares = (int) Math.ceil((dimension) / 2.0);
+
+    // locate center
+    int center_x = (int) Math.ceil((dimension) / 2.0)-1;
+    int center_y = (int) Math.ceil((dimension) / 2.0)-1;
+    result[center_x][center_y] = 1;
+
+
+    int current_x = center_x;
+    int current_y = center_y;
+
+    int step = 0;
+    for (int currentSquare = 1; currentSquare < numConcentricSquares; currentSquare++) {
+      // open the new square
+      for (int k = 1; k <= 1; k++) {
+        current_y = current_y + 1;
+        final int sum = sumNeighbours(result, current_x, current_y);
+        if (sum > source) return sum;
+        result[current_x][current_y] = sum;
+      }
+
+      ++step;
+      // move up
+      for (int k = 1; k <= step; k++) {
+        current_x = current_x - 1;
+        final int sum = sumNeighbours(result, current_x, current_y);
+        if (sum > source) return sum;
+        result[current_x][current_y] = sum;
+      }
+
+      ++step;
+      // move left
+      for (int k = 1; k <= step; k++) {
+        current_y = current_y - 1;
+        final int sum = sumNeighbours(result, current_x, current_y);
+        if (sum > source) return sum;
+        result[current_x][current_y] = sum;
+      }
+
+      // move down
+      for (int k = 1; k <= step; k++) {
+        current_x = current_x + 1;
+        final int sum = sumNeighbours(result, current_x, current_y);
+        if (sum > source) return sum;
+        result[current_x][current_y] = sum;
+      }
+
+      // move right
+      for (int k = 1; k <= step; k++) {
+        current_y = current_y + 1;
+        final int sum = sumNeighbours(result, current_x, current_y);
+        if (sum > source) return sum;
+        result[current_x][current_y] = sum;
+      }
+    }
+
+    return 0;
+  }
+
+  private int sumNeighbours(int[][] matrix, int current_x, int current_y) {
+    int result = 0;
+    for (int i = current_x-1; i <= current_x+1; i++) {
+      for (int j = current_y-1; j <= current_y+1; j++) {
+        if (i < 0 || j < 0 || i == matrix.length || j == matrix[i].length) {
+          continue;
+        }
+        result += matrix[i][j];
+      }
+    }
+
+    return result;
+  }
 }
