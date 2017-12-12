@@ -15,9 +15,11 @@ public class Day12Test {
     String inputExample = IOUtils.toString(resourceAsStreamExample, "UTF-8");
 
     Assert.assertEquals(6, sut.connectingPeople(inputExample));
+    Assert.assertEquals(2, sut.howManyGroups(inputExample));
 
     final InputStream resourceAsStream = this.getClass().getResourceAsStream("/input12.txt");
     String input = IOUtils.toString(resourceAsStream, "UTF-8");
     Assert.assertEquals(378, sut.connectingPeople(input));
+    Assert.assertEquals(204, sut.howManyGroups(input));
   }
 }
