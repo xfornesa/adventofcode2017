@@ -1,5 +1,6 @@
 package org.xfornesa.adventofcode;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +18,21 @@ public class Day08 {
     final CPU cpu = new CPU(registers);
     cpu.run(instructions);
 
-    return cpu.getRegisters().entrySet().stream().max((o1, o2) -> o1.getValue().compareTo(o2.getValue()))
+    return cpu.getRegisters().entrySet().stream().max(Comparator.comparing(Map.Entry::getValue))
         .map(Map.Entry::getValue)
         .orElse(0);
+  }
+
+  public int maxValue(String input) {
+    final Map<String, Integer> registers = new HashMap<>();
+    final List<Instruction> instructions = Stream.of(input.split("\n"))
+        .map(Instruction::of)
+        .collect(Collectors.toList());
+
+    final CPU cpu = new CPU(registers);
+    int maxValueStored = cpu.run(instructions);
+
+    return maxValueStored;
   }
 
   private static class Instruction {
@@ -63,14 +76,19 @@ public class Day08 {
       this.registers = registers;
     }
 
-    public void run(List<Instruction> instructions) {
-      instructions
-          .forEach(instruction -> {
-            if (checkCondition(instruction)) {
-              final int newValue = calculateOperationValue(instruction);
-              registers.put(instruction.store, newValue);
-            }
-          });
+    public int run(List<Instruction> instructions) {
+      int maxValueStored = 0;
+      for (Instruction instruction : instructions) {
+        if (checkCondition(instruction)) {
+          final int newValue = calculateOperationValue(instruction);
+          registers.put(instruction.store, newValue);
+          if (newValue > maxValueStored) {
+            maxValueStored = newValue;
+          }
+        }
+      }
+
+      return maxValueStored;
     }
 
     private int calculateOperationValue(Instruction instruction) {

@@ -16,10 +16,12 @@ public class Day08Test {
     String inputExample = IOUtils.toString(resourceAsStreamExample, "UTF-8");
 
     Assert.assertEquals(1, sut.jumpInstructions(inputExample));
+    Assert.assertEquals(10, sut.maxValue(inputExample));
 
 
     final InputStream resourceAsStream = this.getClass().getResourceAsStream("/input08.txt");
     String input = IOUtils.toString(resourceAsStream, "UTF-8");
-    Assert.assertEquals(1, sut.jumpInstructions(input));
+    Assert.assertEquals(5946, sut.jumpInstructions(input));
+    Assert.assertEquals(6026, sut.maxValue(input));
   }
 }
